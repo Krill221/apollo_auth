@@ -57,3 +57,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "react_on_rails", "~> 11.1"
+
+gem 'mini_racer', platforms: :ruby
+gem "graphql", "~> 1.8"
+
+gem 'graphiql-rails', group: :development
+gem "bcrypt", "~> 3.1"
