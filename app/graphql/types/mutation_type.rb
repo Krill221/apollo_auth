@@ -1,7 +1,5 @@
-Types::MutationType = GraphQL::ObjectType.define do
-  name 'Mutation'
-
-  field :createUser, function: Resolvers::CreateUser.new
-  field :signinUser, function: Resolvers::SignInUser.new
-
+class Types::MutationType < GraphQL::Schema::Object
+    field :singOut, mutation: Mutations::UserMutations::SingOut
+    field :singIn, mutation: Mutations::UserMutations::SingIn
+    field :singUp, mutation: Mutations::UserMutations::SingUp
 end
