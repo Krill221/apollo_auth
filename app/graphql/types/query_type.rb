@@ -6,6 +6,5 @@ module Types
     def current_user_token
        context[:session][:token].to_s
     end
-
   end
 end

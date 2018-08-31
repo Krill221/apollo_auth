@@ -3,7 +3,8 @@ module Mutations
 
 
     # TODO: define arguments
-    argument :email, Types::AuthProviderEmailInput, required: true
+    argument :email, String, required: true
+    argument :password, String, required: true
 
 
     # TODO: define return fields
@@ -12,17 +13,15 @@ module Mutations
 
 
     # TODO: define resolve method
-    def resolve(email:)
-      input = email
-
+    def resolve(email:, password:)
       # basic validation
-      return unless input
+      return unless email
 
-      user = User.find_by email: input.email
+      user = User.find_by email: email
 
       # ensures we have the correct user
       return unless user
-      return unless user.authenticate(input.password)
+      return unless user.authenticate(password)
 
       crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
       token = crypt.encrypt_and_sign("user-id:#{ user.id }")

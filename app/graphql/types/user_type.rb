@@ -1,7 +1,7 @@
-Types::UserType = GraphQL::ObjectType.define do
-  name 'User'
-
-  field :id, !types.ID
-  field :name, !types.String
-  field :email, !types.String
+module Types
+  class UserType < Types::BaseObject
+    field :id, ID
+    field :name, String
+    field :email, String
+  end
 end

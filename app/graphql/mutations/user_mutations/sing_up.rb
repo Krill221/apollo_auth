@@ -2,16 +2,17 @@ module Mutations
   class UserMutations::SingUp < GraphQL::Schema::RelayClassicMutation
     ## args
     argument :name, String, required: true
-    argument :authProvider, Types::AuthProviderInput, required: true
+    argument :email, String, required: true
+    argument :password, String, required: true
 
     ## return
     field :user, Types::UserType, null: true
 
-    def resolve(name:, auth_provider:)
+    def resolve(name:, email:, password:)
       user = User.create!(
         name: name,
-        email: auth_provider.email.email,
-        password: auth_provider.email.password
+        email: email,
+        password: password
       )
       return {user: user}
     rescue ActiveRecord::RecordInvalid => e

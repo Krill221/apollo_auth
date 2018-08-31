@@ -1,11 +1,6 @@
 module Mutations
   class UserMutations::SingOut < GraphQL::Schema::RelayClassicMutation
-    # TODO: define return fields
     field :token, String, null: false
-
-    # TODO: define arguments
-
-    # TODO: define resolve method
     def resolve()
       context[:session].delete(:token)
       { token: '' }
