@@ -7,7 +7,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 
 import { Panel } from "./Panel";
 
-let httpLink = new HttpLink({uri: `http://0.0.0.0:3000/graphql`});
+let httpLink = new HttpLink({uri: `http://localhost:3000/graphql`});
 const apollo_client = new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache({addTypename: false})

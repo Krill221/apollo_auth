@@ -1,16 +1,13 @@
 import React from 'react';
-import { User } from "./User";
-import SingIn from "./SingIn";
-import SingOut from "./SingOut";
-import SingUp from "./SingUp";
+import Facebook from "./Facebook";
+import ServerLogIn from "./ServerLogIn";
 
 
 
 export const Panel = () => (
   <div>
-    <User />
-    <SingIn />
-    <SingOut />
-    <SingUp />
+    <ServerLogIn />
+    <hr />
+    <Facebook />
   </div>
 )
