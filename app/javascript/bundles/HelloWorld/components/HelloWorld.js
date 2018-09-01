@@ -5,9 +5,7 @@ import {HttpLink} from 'apollo-link-http';
 import {ApolloClient} from 'apollo-client';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 
-import { User } from "./User";
-
-
+import { Panel } from "./Panel";
 
 let httpLink = new HttpLink({uri: `http://0.0.0.0:3000/graphql`});
 const apollo_client = new ApolloClient({
@@ -21,7 +19,7 @@ export default class HelloWorld extends React.Component {
     return (
      <ApolloProvider client={apollo_client}>
        <div>
-         <User />
+         <Panel />
        </div>
      </ApolloProvider>
     );
