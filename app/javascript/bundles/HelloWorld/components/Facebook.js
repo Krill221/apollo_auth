@@ -1,5 +1,11 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
+import {Mutation} from 'react-apollo';
+import {ApolloConsumer} from "react-apollo";
+import {SING_IN_FACEBOOK} from "../queries";
+import {CURRENT_USER_TOKEN} from "../queries";
+
+
 
 class Facebook extends React.Component {
 
@@ -8,11 +14,11 @@ class Facebook extends React.Component {
     userId: '',
     name: '',
     email: '',
-    picture: ''
+    picture: '',
+    accessToken: ''
   }
 
   componentClicked = () => {
-    console.log('componentClicked');
   }
 
   responseFacebook = response => {
@@ -22,7 +28,8 @@ class Facebook extends React.Component {
       userId: response.userId,
       name: response.name,
       email: response.email,
-      picture: response.picture.data.url
+      picture: response.picture.data.url,
+      accessToken: response.accessToken
     });
   }
 
@@ -30,11 +37,15 @@ class Facebook extends React.Component {
     let fbContent = '';
 
     if(this.state.isLoggedIn){
-      fbContent = (<div>
-        <div>{this.state.name}</div>
-        <div>{this.state.email}</div>
-        <img src={this.state.picture} />
-        </div>)
+        fbContent = (<ApolloConsumer>
+          { (client) => {
+            client.mutate({ mutation: SING_IN_FACEBOOK,
+              variables: { facebooktoken: this.state.accessToken },
+              refetchQueries: [{query: CURRENT_USER_TOKEN}]
+            })
+            return <div>{this.state.name}</div>;
+          }}
+        </ApolloConsumer>)
     } else {
       fbContent = (<FacebookLogin
           appId="2318681708359292"

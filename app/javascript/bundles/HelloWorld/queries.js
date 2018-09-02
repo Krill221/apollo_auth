@@ -39,3 +39,10 @@ mutation SingUp($name: String!, $email: String!, $password: String!) {
     }
   }
 }`
+
+export const SING_IN_FACEBOOK = gql`
+mutation SingInFacebook($facebooktoken: String!) {
+  singInFacebook(input: { facebooktoken: $facebooktoken }) {
+      token
+  }
+}`

@@ -67,3 +67,7 @@ gem "bcrypt", "~> 3.1"
 gem "devise", "~> 4.5"
 
 gem "koala", "~> 3.0"
+
+gem "better_errors", "~> 2.5"
+
+gem "binding_of_caller", "~> 0.8.0"

@@ -6,4 +6,8 @@ class HelloWorldController < ApplicationController
   def index
     @hello_world_props = { name: "Stranger" }
   end
+
+  def test
+    xcxc
+  end
 end
