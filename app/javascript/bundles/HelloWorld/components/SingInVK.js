@@ -52,12 +52,7 @@ class SingInVK extends React.Component {
               refetchQueries: [{query: CURRENT_USER_TOKEN}]
             }).then(console.log);
             return <div>
-              <div>{this.state.userId}</div>
               <div>{this.state.name}</div>
-              <div>{this.state.expire}</div>
-              <div>{this.state.secret}</div>
-              <div>{this.state.sid}</div>
-              <div>{this.state.sig}</div>
             </div>;
           }}
         </ApolloConsumer>)

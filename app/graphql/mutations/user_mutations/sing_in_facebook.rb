@@ -20,10 +20,9 @@ module Mutations
             )
           end
 
-          crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-          token = crypt.encrypt_and_sign("user-id")
+          token = user.generate_access_token
           context[:session][:token] = token
-          
+
           return { token: token }
         end
       rescue => error
