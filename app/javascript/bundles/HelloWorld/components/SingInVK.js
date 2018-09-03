@@ -1,10 +1,9 @@
 import React from 'react';
-import FacebookLogin from 'react-facebook-login';
+import VkAuth from 'react-vk-auth';
 import {Mutation} from 'react-apollo';
 import {ApolloConsumer} from "react-apollo";
-import {SING_IN_FACEBOOK} from "../queries";
+import {SING_IN_VK} from "../queries";
 import {CURRENT_USER_TOKEN} from "../queries";
-
 
 
 class SingInVK extends React.Component {
@@ -13,47 +12,56 @@ class SingInVK extends React.Component {
     isLoggedIn: false,
     userId: '',
     name: '',
-    email: '',
-    picture: '',
-    accessToken: ''
+    expire: '',
+    secret: '',
+    sid: '',
+    sig: ''
   }
 
-  componentClicked = () => {
-  }
-
-  responseFacebook = response => {
-    console.log(response);
+  responseVK = (response) => {
     this.setState({
       isLoggedIn: true,
-      userId: response.userId,
-      name: response.name,
-      email: response.email,
-      picture: response.picture.data.url,
-      accessToken: response.accessToken
+      userId: response.session.mid,
+      name: response.session.user.first_name + ' ' + response.session.user.last_name,
+      expire: response.session.expire,
+      secret: response.session.secret,
+      sid: response.session.sid,
+      sig: response.session.sig
     });
+
   }
 
   render() {
-    let fbContent = (<FacebookLogin
-        appId="2318681708359292"
-        autoLoad={false}
-        fields="name,email,picture"
-        onClick={this.componentClicked}
-        callback={this.responseFacebook} />);
+
+
+    let content = (<VkAuth apiId="6681159" callback={this.responseVK} >
+      LOGIN WITH VK
+    </VkAuth>);
+
 
     if(this.state.isLoggedIn){
-        fbContent = (<ApolloConsumer>
+        let str_vk = "expire="+this.state.expire+"mid="+this.state.userId+"secret="+this.state.secret+"sid="+this.state.sid
+        console.log(str_vk);
+        console.log(this.state.sig);
+        content = (<ApolloConsumer>
           { (client) => {
-            client.mutate({ mutation: SING_IN_FACEBOOK,
-              variables: { facebooktoken: this.state.accessToken },
+            client.mutate({ mutation: SING_IN_VK,
+              variables: { str_vk: str_vk, sig: this.state.sig },
               refetchQueries: [{query: CURRENT_USER_TOKEN}]
             })
-            return <div>{this.state.name}</div>;
+            return <div>
+              <div>{this.state.userId}</div>
+              <div>{this.state.name}</div>
+              <div>{this.state.expire}</div>
+              <div>{this.state.secret}</div>
+              <div>{this.state.sid}</div>
+              <div>{this.state.sig}</div>
+            </div>;
           }}
         </ApolloConsumer>)
     }
 
-    return <div>{fbContent}</div>;
+    return content;
   }
 }
 

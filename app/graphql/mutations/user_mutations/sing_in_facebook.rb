@@ -1,11 +1,8 @@
 module Mutations
   class UserMutations::SingInFacebook < GraphQL::Schema::RelayClassicMutation
-    # TODO: define return fields
     field :token, String, null: false
 
-    # TODO: define arguments
     argument :facebooktoken, String, required: true
-
 
     def resolve(facebooktoken:)
       @graph = Koala::Facebook::API.new(facebooktoken)
@@ -23,8 +20,9 @@ module Mutations
             )
           end
 
-          crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-          token = crypt.encrypt_and_sign("user-id")
+          #crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
+          #token = crypt.encrypt_and_sign("user-id")
+          token = "123"
           context[:session][:token] = token
           return { token: token }
         end

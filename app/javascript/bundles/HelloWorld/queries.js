@@ -46,3 +46,10 @@ mutation SingInFacebook($facebooktoken: String!) {
       token
   }
 }`
+
+export const SING_IN_VK = gql`
+mutation SingInVk($str_vk: String!, $sig: String!) {
+  singInVk(input: { str_vk: $str_vk, sig: $sig }) {
+      token
+  }
+}`

@@ -1,6 +1,8 @@
 import React from 'react';
-import SingInFacebook from "./SingInFacebook";
 import ServerLogIn from "./ServerLogIn";
+import SingInFacebook from "./SingInFacebook";
+import SingInVK from "./SingInVK";
+
 
 
 
@@ -9,5 +11,8 @@ export const Panel = () => (
     <ServerLogIn />
     <hr />
     <SingInFacebook />
+    <hr />
+    <SingInVK />
+
   </div>
 )
