@@ -7,7 +7,7 @@ import {CURRENT_USER_TOKEN} from "../queries";
 
 
 
-class Facebook extends React.Component {
+class SingInVK extends React.Component {
 
   state = {
     isLoggedIn: false,
@@ -34,7 +34,12 @@ class Facebook extends React.Component {
   }
 
   render() {
-    let fbContent = '';
+    let fbContent = (<FacebookLogin
+        appId="2318681708359292"
+        autoLoad={false}
+        fields="name,email,picture"
+        onClick={this.componentClicked}
+        callback={this.responseFacebook} />);
 
     if(this.state.isLoggedIn){
         fbContent = (<ApolloConsumer>
@@ -46,17 +51,10 @@ class Facebook extends React.Component {
             return <div>{this.state.name}</div>;
           }}
         </ApolloConsumer>)
-    } else {
-      fbContent = (<FacebookLogin
-          appId="2318681708359292"
-          autoLoad={false}
-          fields="name,email,picture"
-          onClick={this.componentClicked}
-          callback={this.responseFacebook} />)
     }
 
     return <div>{fbContent}</div>;
   }
 }
 
-export default Facebook
+export default SingInVK

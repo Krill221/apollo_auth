@@ -8,9 +8,13 @@ const ServerLogIn = () => (
   <div>
     <div>Server Auth</div>
     <User />
+    <hr />
     <SingIn />
+    <hr />
     <SingOut />
+    <hr />
     <SingUp />
+    <hr />
   </div>
 )
 
