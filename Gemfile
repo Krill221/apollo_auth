@@ -64,7 +64,7 @@ gem "graphql", "~> 1.8"
 gem 'graphiql-rails', group: :development
 gem "bcrypt", "~> 3.1"
 
-gem "devise", "~> 4.5"
+#gem "devise", "~> 4.5"
 
 gem "koala", "~> 3.0"
 
