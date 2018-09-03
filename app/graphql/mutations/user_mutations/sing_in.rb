@@ -23,9 +23,8 @@ module Mutations
       return unless user
       return unless user.authenticate(password)
 
-      #crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-      #token = crypt.encrypt_and_sign("user-id:#{ user.id }")
-      token = "123"
+      crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
+      token = crypt.encrypt_and_sign("user-id")
       context[:session][:token] = token
 
       return {user: user, token: token }
